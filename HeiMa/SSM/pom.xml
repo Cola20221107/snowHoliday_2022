@@ -6,7 +6,11 @@
 
     <groupId>xyz.ccola</groupId>
     <artifactId>SSM</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>SSM_01_Spring</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
