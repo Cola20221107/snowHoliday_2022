@@ -83,7 +83,7 @@ create table tb_user
 
 ```
 
-![image-20221219235711674](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221219235711674.png)
+![image-20221219235711674](./assets/image-20221219235711674.png)
 
 
 
@@ -91,7 +91,7 @@ create table tb_user
 
 > 采用 Maven 聚合项目以 `GraDuationProject_01_HeiMaMovie`模块作为 ROOT 模块进行聚合管理。
 
-![image-20221219235929693](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221219235929693.png)
+![image-20221219235929693](./assets/image-20221219235929693.png)
 
 > 目录说明：
 >
@@ -102,7 +102,7 @@ create table tb_user
 > - `movie_web_manager` 管理员模块
 > - `movie_web_portal` 用户模块
 
-![image-20221220000229405](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220000229405.png)
+![image-20221220000229405](./assets/image-20221220000229405.png)
 
 ### 2.1 movie_common 模块
 
@@ -112,7 +112,7 @@ create table tb_user
 > - `OSSConfig 和 VodConfig` 阿里云 OSS 和 Vod 技术配置类
 > - `OSSTemplate 和 VodTemplate` 相关技术的接口类
 
-![image-20221220000723435](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220000723435.png)
+![image-20221220000723435](./assets/image-20221220000723435.png)
 
 > 具体实现
 
@@ -406,7 +406,7 @@ public class VodTemplate {
 
 > 目录说明：数据持久层
 
-![image-20221220000910622](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220000910622.png)
+![image-20221220000910622](./assets/image-20221220000910622.png)
 
 > 具体实现
 
@@ -616,7 +616,7 @@ public class User implements Serializable {
 
 > 目录说明：mapper 层
 
-![image-20221220001057172](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220001057172.png)
+![image-20221220001057172](./assets/image-20221220001057172.png)
 
 > 具体实现
 
@@ -702,7 +702,7 @@ public interface UserMapper extends BaseMapper<User> {
 
 > 目录说明：服务层
 
-![image-20221220001203644](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220001203644.png)
+![image-20221220001203644](./assets/image-20221220001203644.png)
 
 ```java
 package xyz.ccola.service;
@@ -956,7 +956,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 > - `static` 静态资源目录
 > - `application.yml` 配置文件
 
-![image-20221220001339723](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220001339723.png)
+![image-20221220001339723](./assets/image-20221220001339723.png)
 
 > 具体实现
 
@@ -1454,7 +1454,7 @@ al:
 
 > 目录说明：
 
-![image-20221220001843391](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220001843391.png)
+![image-20221220001843391](./assets/image-20221220001843391.png)
 
 ```java
 package xyz.ccola.controller;
@@ -1689,7 +1689,7 @@ public void testParseToken() throws Exception {
 
 ```
 
-![image-20221220002823035](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220002823035.png)
+![image-20221220002823035](./assets/image-20221220002823035.png)
 
 > common 中OssTemplateTest类测试
 
@@ -1759,7 +1759,7 @@ public void testGetContentType() throws Exception {
 
 
 
-![image-20221220002926940](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220002926940.png)
+![image-20221220002926940](./assets/image-20221220002926940.png)
 
 ### 3.2 控制类采用 Tomcat + PostMan 进行联调
 
@@ -1767,33 +1767,33 @@ public void testGetContentType() throws Exception {
 
 > MemberController 接口测试
 
-![image-20221220004220877](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004220877.png)
+![image-20221220004220877](./assets/image-20221220004220877.png)
 
 
 
-![image-20221220004349632](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004349632.png)
+![image-20221220004349632](./assets/image-20221220004349632.png)
 
 
 
 > MovieController 接口测试
 
-![image-20221220004446607](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004446607.png)
+![image-20221220004446607](./assets/image-20221220004446607.png)
 
-![image-20221220004452842](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004452842.png)
+![image-20221220004452842](./assets/image-20221220004452842.png)
 
 > UploadController 接口测试
 
-![image-20221220004540114](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004540114.png)
+![image-20221220004540114](./assets/image-20221220004540114.png)
 
-![image-20221220004628199](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004628199.png)
+![image-20221220004628199](./assets/image-20221220004628199.png)
 
-![image-20221220004640716](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004640716.png)
+![image-20221220004640716](./assets/image-20221220004640716.png)
 
 > UserController 接口测试
 
-![image-20221220004731440](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004731440.png)
+![image-20221220004731440](./assets/image-20221220004731440.png)
 
-![image-20221220004801555](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004801555.png)
+![image-20221220004801555](./assets/image-20221220004801555.png)
 
 
 
@@ -1801,27 +1801,27 @@ public void testGetContentType() throws Exception {
 
 > CategoryController 接口测试
 
-![image-20221220004911319](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004911319.png)
+![image-20221220004911319](./assets/image-20221220004911319.png)
 
-![image-20221220004958792](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220004958792.png)
+![image-20221220004958792](./assets/image-20221220004958792.png)
 
 > MovieFontController 接口测试
 
-![image-20221220005122715](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220005122715.png)
+![image-20221220005122715](./assets/image-20221220005122715.png)
 
 
 
-![image-20221220005044090](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220005044090.png)
+![image-20221220005044090](./assets/image-20221220005044090.png)
 
 ### 3.3 效果测试
 
-![image-20221220005236623](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220005236623.png)
+![image-20221220005236623](./assets/image-20221220005236623.png)
 
-![image-20221220005228711](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220005228711.png)
+![image-20221220005228711](./assets/image-20221220005228711.png)
 
-![image-20221220005314004](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220005314004.png)
+![image-20221220005314004](./assets/image-20221220005314004.png)
 
-![image-20221220005324489](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220005324489.png)
+![image-20221220005324489](./assets/image-20221220005324489.png)
 
 ## 四、收获
 
@@ -1866,9 +1866,9 @@ axios.interceptors.response.use(
 
 > 前端通过 `axios` 发送请求可以通过 `token.js` 拦截并设置请求头，但 `eml`的 `upload` 控件需要在 `data` 中手动设置请求头
 
-![image-20221220002449164](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220002449164.png)
+![image-20221220002449164](./assets/image-20221220002449164.png)
 
-![image-20221220002459540](HeiMa/GraDuationProject/GraDuationProject_01_HeiMaMovie/assets/image-20221220002459540.png)
+![image-20221220002459540](./assets/image-20221220002459540.png)
 
 ### 4.2 使用 `Sl4j` 结合配置文件实现彩色日志的输出
 
