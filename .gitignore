@@ -26,4 +26,5 @@ hs_err_pid*
 
 /.idea/
 snowHoliday_2022.iml
+*.iml
 
