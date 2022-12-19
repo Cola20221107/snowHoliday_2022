@@ -7,6 +7,8 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,7 @@ import java.io.InputStream;
  * @ Description: VodTemplate
  */
 @Component
+@Slf4j
 public class VodTemplate {
     @Autowired
     private VodConfig vodConfig;
@@ -32,6 +35,8 @@ public class VodTemplate {
                 vodConfig.getRegionId(),
                 vodConfig.getAccessKeyId(),
                 vodConfig.getAccessKeySecret());
+        log.info("成功获取 Vod 客户端对象");
+
         return new DefaultAcsClient(profile);
     }
 
@@ -52,6 +57,7 @@ public class VodTemplate {
         UploadVideoImpl uploader = new UploadVideoImpl();
         UploadStreamResponse response = uploader.uploadStream(request);
         String videoId = response.getVideoId();
+        log.info("成功上传视频并获取到视频 id {}",videoId);
         return videoId;
     }
 
@@ -64,6 +70,7 @@ public class VodTemplate {
     public GetVideoPlayAuthResponse getVideoPlayAuth(String videoId) throws Exception {
         GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
         request.setVideoId(videoId);
+        log.info("成功获取到 {} 的播放凭证",videoId);
         return initVodClient().getAcsResponse(request);
     }
 }

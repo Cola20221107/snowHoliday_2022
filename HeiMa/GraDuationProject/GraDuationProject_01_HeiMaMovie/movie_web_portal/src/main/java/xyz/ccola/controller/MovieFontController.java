@@ -1,6 +1,7 @@
 package xyz.ccola.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/portal/movie")
+@Slf4j
 public class MovieFontController {
     @Autowired
     private MovieService movieService;
@@ -31,6 +33,7 @@ public class MovieFontController {
      */
     @RequestMapping("/findByCid")
     public List<Movie> movieList(Integer cid) {
+        log.info("成功访问到 /portal/category/findByCid");
         return movieService.findByCid(cid);
     }
 
@@ -42,7 +45,7 @@ public class MovieFontController {
      */
     @RequestMapping("/findById")
     public Movie findById(Integer id) throws Exception {
-
+        log.info("成功访问到 /portal/category/findById");
         Movie movie = movieService.getById(id);
 
         /*

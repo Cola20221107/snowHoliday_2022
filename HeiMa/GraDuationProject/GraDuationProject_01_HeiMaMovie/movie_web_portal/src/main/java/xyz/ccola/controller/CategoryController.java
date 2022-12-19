@@ -1,5 +1,6 @@
 package xyz.ccola.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/portal/category")
+@Slf4j
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -26,6 +28,7 @@ public class CategoryController {
      */
     @RequestMapping("/findAll")
     public List<Category> findAll(){
+        log.info("成功访问到 /portal/category/findAll");
         return categoryService.list(null);
     }
 }

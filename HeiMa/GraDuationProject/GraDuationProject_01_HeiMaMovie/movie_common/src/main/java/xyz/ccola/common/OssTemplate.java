@@ -3,6 +3,7 @@ package xyz.ccola.common;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.ObjectMetadata;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ import java.util.Date;
  * @ Description: OssTemplate
  */
 @Component
+@Slf4j
 public class OssTemplate {
     @Autowired
     private OSSConfig ossConfig;
@@ -35,6 +37,7 @@ public class OssTemplate {
                 ossConfig.getEndpoint(),
                 ossConfig.getAccessKeyId(),
                 ossConfig.getAccessKeySecret());
+        log.info("成功获取 OSS 连接对象 {}",ossClient);
 
         /*
         设置包含文件后缀在内的完整路径 objectName
@@ -42,19 +45,18 @@ public class OssTemplate {
          */
         String objectName = "images/" + new SimpleDateFormat("yyyy/MM/dd").format(new Date())
                 + "/" + System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
-
         /*
         设置访问资源的请求头 meta 解决访问资源路径直接下载的问题
          */
         ObjectMetadata meta = new ObjectMetadata();
         meta.setContentType(getContentType(fileName.substring(fileName.lastIndexOf("."))));
         ossClient.putObject(ossConfig.getBucketName(), objectName, inputStream, meta);
-
+        log.info("生成文件访问路径{}并重写访问资源请求头",objectName);
         /*
         关闭 OSS 连接对象
          */
         ossClient.shutdown();
-
+        log.info("成功关闭 OSS 连接对象");
         return ossConfig.getUrl() + "/" + objectName;
     }
 

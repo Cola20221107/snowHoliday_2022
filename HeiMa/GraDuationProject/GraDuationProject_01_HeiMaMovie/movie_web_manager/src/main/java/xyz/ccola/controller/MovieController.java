@@ -1,5 +1,6 @@
 package xyz.ccola.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/movie")
+@Slf4j
 public class MovieController {
 
     @Autowired
@@ -28,6 +30,7 @@ public class MovieController {
      */
     @RequestMapping("/findAll")
     public List<Movie> findAll(){
+        log.info("成功访问到 /admin/movie/findAll");
        return movieService.list(null);
     }
 
@@ -38,11 +41,13 @@ public class MovieController {
      */
     @RequestMapping("/save")
     public Boolean insert(@RequestBody Movie movie){
-
+        log.info("成功访问到 /admin/movie/save");
         if(movie.getId() == null){
+            log.info("正在进行添加操作");
             return movieService.save(movie);
 
         }else {
+            log.info("正在进行更新操作");
             return movieService.updateById(movie);
         }
 
@@ -55,6 +60,7 @@ public class MovieController {
      */
     @RequestMapping("/findById")
     public Movie findById(Integer id){
+        log.info("成功访问到 /admin/movie/findById");
         return movieService.getById(id);
     }
 
@@ -66,6 +72,7 @@ public class MovieController {
      */
     @RequestMapping("/deleteById")
     public Boolean deleteById(Integer id){
+        log.info("成功访问到 /admin/movie/deleteById");
         return movieService.removeById(id);
     }
 
@@ -75,6 +82,7 @@ public class MovieController {
      */
     @RequestMapping("/deleteByIds")
     public void deleteByIds(Integer[] ids){
+        log.info("成功访问到 /admin/movie/deleteByIds");
         movieService.deleteByIds(ids);
     }
 }
