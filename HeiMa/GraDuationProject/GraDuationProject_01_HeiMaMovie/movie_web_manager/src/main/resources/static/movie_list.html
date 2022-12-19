@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="./css/pintuer.css">
+<link rel="stylesheet" href="./css/admin.css">
+<script src="./js/jquery.js"></script>
+<script src="./js/pintuer.js"></script>
+<script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+<script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+<script type="text/javascript" src="./js/token.js"></script>
+
+
+<div class="panel admin-panel" id="movieListDiv">
+    <div class="panel-head"><strong class="icon-reorder">影视列表</strong> <a href="" style="float:right; display:none;">添加字段</a>
+    </div>
+    <div class="padding border-bottom" style="padding-bottom: 10px">
+        <a href="javascript:void(0)" class="button border-red icon-trash-o" @click="deleteByIds()"> 批量删除</a>
+        <a class="button border-main icon-plus-square-o" style="float: right" href="./movie_add.html"> 添加影视</a>
+    </div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="5%">选择</th>
+            <th width="5%">排序</th>
+            <th>图片</th>
+            <th>影视名称</th>
+            <th width="10%">导演</th>
+            <th>演员</th>
+            <th width="310">操作</th>
+        </tr>
+
+        <tr v-for="(movie,index) in movieList">
+            <td style="text-align:left; padding-left:10px;">
+                <input type="checkbox" name="ids" v-model="ids" :value="movie.id"/>
+            </td>
+            <td style="text-align:left; padding-left:20px;">{{index+1}}</td>
+            <td width="10%"><img :src="movie.image" alt="" width="70" height="50"/></td>
+            <td>{{movie.name}}</td>
+            <td>{{movie.director}}</td>
+            <td>{{movie.actor}}</td>
+            <td>
+                <div class="button-group">
+                    <a class="button border-main" :href="'./movie_add.html?id='+movie.id"><span
+                            class="icon-edit"></span>修改
+                    </a>
+                    <a class="button border-red" href="javascript:void(0)" @click="deleteById(movie.id)">
+                        <span class="icon-trash-o"></span> 删除
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    const app = new Vue({
+        el: '#movieListDiv',
+        data: {
+            cid: "",//分类
+            keyword: "",//关键字
+            movieList: [],
+            ids: [],//收集批量删除用到的id集合
+        },
+        methods: {
+            //查询影视列表的方法
+            findList() {
+                axios.get('/admin/movie/findAll').then(resp => {
+                    this.movieList = resp.data;
+                })
+            },
+
+            //根据id删除
+            deleteById(moviesId) {
+                axios.get('/admin/movie/deleteById?id=' + moviesId).then(resp => {
+                    this.findList();
+                })
+            },
+
+            //根据id集合批量删除
+            deleteByIds() {
+                axios.get('/admin/movie/deleteByIds?ids=' + this.ids).then(resp => {
+                    this.findList();
+                })
+            },
+        },
+        created() {
+            //执行查询影视列表的方法
+            this.findList();
+        }
+    })
+</script>
+

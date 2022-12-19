@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>黑马影视首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+    <script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>
+    <style>
+        .imge li {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--导航-->
+    <div>
+        <div class="header">
+            <div class="container">
+                <div class="w3layouts_logo">
+                    <a href="/"><h1>黑马<span>影视</span></h1></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="movies_nav">
+            <div class="container">
+                <nav class="navbar navbar-default">
+                    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                        <nav>
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="/">首页</a></li>
+                                <li v-for="(category,index) in categoryList"><a :href="'list.html?cid='+category.id">{{category.name}}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!--焦点图-->
+    <div class="ad">
+        <ul class="imge">
+            <li><img src="./images/2.jpg" width="100%"/></li>
+            <li><img src="./images/3.jpg" width="100%"/></li>
+            <li><img src="./images/4.jpg" width="100%"/></li>
+            <li><img src="./images/5.jpg" width="100%"/></li>
+            <li><img src="./images/6.jpg" width="100%"/></li>
+        </ul>
+    </div>
+
+    <!--尾部-->
+    <div class="footer">
+        <div class="container">
+            <div class="w3ls_footer_grid">
+                <div class="col-md-6 w3ls_footer_grid_left">
+                    <div class="w3ls_footer_grid_left1">
+                        <h2>订阅我们</h2>
+                        <div class="w3ls_footer_grid_left1_pos">
+                            <form action="#" method="post">
+                                <input type="email" name="email" placeholder="你的邮箱..." required="">
+                                <input type="submit" value="发送">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 w3ls_footer_grid_right">
+                    <a href="#"><h2>heima<span>Movies</span></h2></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            categoryList: [],
+        },
+        methods: {
+            findCategoryList() {
+                axios.get('/portal/category/findAll').then(resp => {
+                    this.categoryList = resp.data;
+                })
+            }
+        },
+        created() {
+            this.findCategoryList();
+        }
+    });
+
+    $(document).ready(function () {
+        //所有图片隐藏
+        $(".imge li").hide();
+        //第一张图片淡入
+        $(".imge li").first().fadeIn("slow");
+        //单击事件（当前图片淡出，下一张图片淡入）
+        $(".imge li").click(function () {
+            var next = $(this).next();
+            if ($(this).index() != $(".imge li").length - 1) {
+                $(this).fadeOut("slow");
+                next.fadeIn("slow");
+            } else if ($(this).index() == $(".imge li").length - 1) {
+                next = $(".imge li").first();
+                $(this).fadeOut("slow");
+                next.fadeIn("slow");
+            }
+            return false;
+        });
+    })
+</script>
+</html>
+
+

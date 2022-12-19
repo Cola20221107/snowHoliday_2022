@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>黑马影视列表页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+    <script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--导航-->
+    <div>
+        <div class="header">
+            <div class="container">
+                <div class="w3layouts_logo">
+                    <a href="/"><h1>黑马<span>影视</span></h1></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="movies_nav">
+            <div class="container">
+                <nav class="navbar navbar-default">
+                    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                        <nav>
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="/">首页</a></li>
+                                <li v-for="(category,index) in categoryList"><a :href="'list.html?cid='+category.id">{{category.name}}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- 列表 -->
+    <div id="list">
+        <table class="table table-hover text-center" style="width:70%;" align="center">
+            <tr v-for="(movie,index) in movieList" @click="jump2detail(movie.id)">
+                <td><img :src="movie.image" width="140" height="100"/></td>
+                <td>{{movie.name}}</td>
+                <td>{{movie.director}}</td>
+                <td>{{movie.actor}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!--尾部-->
+    <div class="footer">
+        <div class="container">
+            <div class="w3ls_footer_grid">
+                <div class="col-md-6 w3ls_footer_grid_left">
+                    <div class="w3ls_footer_grid_left1">
+                        <h2>订阅我们</h2>
+                        <div class="w3ls_footer_grid_left1_pos">
+                            <form action="#" method="post">
+                                <input type="email" name="email" placeholder="你的邮箱..." required="">
+                                <input type="submit" value="发送">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 w3ls_footer_grid_right">
+                    <a href="#"><h2>heima<span>Movies</span></h2></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            movieList: [],
+            categoryList: []
+        },
+        methods: {
+            //导航列表
+            findCategoryList() {
+                axios.get('/portal/category/findAll').then(resp => {
+                    this.categoryList = resp.data;
+                })
+            },
+
+            //根据cid查询影视列表
+            findMovieListByCid(cid) {
+                axios.get('/portal/movie/findByCid?cid=' + cid).then(resp => {
+                    this.movieList = resp.data;
+                })
+            },
+
+            //跳转详情页
+            jump2detail(id) {
+                location.href = './detail.html?id=' + id;
+            }
+
+        },
+        created() {
+            //导航列表
+            this.findCategoryList();
+
+            //根据cid查询影视列表
+            let cid = location.search.split("=")[1];
+            if (cid) {
+                this.findMovieListByCid(cid);
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

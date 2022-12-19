@@ -11,6 +11,12 @@
     <modules>
         <module>GraDuationProject_01_HeiMaMovie</module>
     </modules>
+    <!--设置父工程: 里面进行版本的锁定-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+    </parent>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
