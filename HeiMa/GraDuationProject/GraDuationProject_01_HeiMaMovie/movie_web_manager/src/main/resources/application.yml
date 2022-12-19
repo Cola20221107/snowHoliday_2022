@@ -23,11 +23,11 @@ mybatis-plus:
 al:
   oss: #存储
     endpoint: oss-cn-zhangjiakou.aliyuncs.com
-    accessKeyId: LTAI5t9TggK5qoZ2wPZDGBGg
-    accessKeySecret: WeTFuCkQYgC91nGwDls6g2iXQDrUnM
+    accessKeyId:
+    accessKeySecret:
     bucketName: heima-movie-cola
     url: https://heima-movie-cola.oss-cn-zhangjiakou.aliyuncs.com
   vod: # 视频
     regionId: cn-shanghai
-    accessKeyId: LTAI5t9TggK5qoZ2wPZDGBGg
-    accessKeySecret: WeTFuCkQYgC91nGwDls6g2iXQDrUnM
+    accessKeyId:
+    accessKeySecret:
