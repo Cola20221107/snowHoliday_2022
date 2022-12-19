@@ -1,0 +1,69 @@
+<link rel="stylesheet" href="./css/pintuer.css">
+<link rel="stylesheet" href="./css/admin.css">
+<script src="./js/jquery.js"></script>
+<script src="./js/pintuer.js"></script>
+<script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+<script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+<script type="text/javascript" src="./js/token.js"></script>
+<div class="panel admin-panel" id="memberDiv">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加会员</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x">
+            <div class="form-group">
+                <div class="label">
+                    <label>会员名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" v-model="member.username"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>手机号：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" v-model="member.phone"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <a class="button bg-main icon-check-square-o" @click="save()"> 提交</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    const app = new Vue({
+        el: '#memberDiv',
+        data: {
+            member: {},
+        },
+        methods: {
+            //根据影视id查询信息
+            findById(memberId) {
+                axios.get('/admin/member/findById?id=' + memberId).then(resp => {
+                    this.member = resp.data;
+                })
+            },
+
+            //保存影视
+            save() {
+                axios.post('/admin/member/save', this.member).then(resp => {
+                    location.href = "./member_list.html";
+                })
+            },
+        },
+        created() {
+            //根据id查询当前页面影视信息
+            let memberId = location.search.split("=")[1];
+            if (memberId) {//当修改的时候,才查询
+                this.findById(memberId);
+            }
+        }
+    })
+</script>

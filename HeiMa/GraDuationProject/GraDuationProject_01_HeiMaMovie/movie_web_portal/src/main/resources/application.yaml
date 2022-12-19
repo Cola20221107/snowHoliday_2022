@@ -1,0 +1,24 @@
+# 服务器端口
+server:
+  port: 8081
+
+#数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://43.143.184.147:3306/heima_movie?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+
+# mybatis简单配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启标准日志输出
+    map-underscore-to-camel-case: true # 开启自动驼峰转换
+
+# 阿里配置
+al:
+  vod: # 视频
+    regionId: cn-shanghai
+    accessKeyId: # 自行申请
+    accessKeySecret:

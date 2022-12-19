@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="./css/pintuer.css">
+<link rel="stylesheet" href="./css/admin.css">
+<script src="./js/jquery.js"></script>
+<script src="./js/pintuer.js"></script>
+<script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+<script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+<script type="text/javascript" src="./js/token.js"></script>
+<script src="./element-ui/lib/index.js"></script>
+<link href="./element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+
+<div class="panel admin-panel" id="movieDiv" v-loading="loading" element-loading-text="文件上传中......">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加影视内容</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x">
+            <div class="form-group">
+                <div class="label">
+                    <label>影视名称：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" v-model="movie.name"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>所属栏目：</label>
+                </div>
+                <div class="field">
+                    <select name="cid" class="input w50" v-model="movie.cid">
+                        <option value="1">电视剧</option>
+                        <option value="2">电影</option>
+                        <option value="3">综艺</option>
+                        <option value="4">动漫</option>
+                        <option value="5">网剧</option>
+                        <option value="6">纪录片</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>关键字：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" v-model="movie.keyword" style="width:25%; float:left;"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>导演：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" v-model="movie.director"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>演员：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" v-model="movie.actor" name="actor"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>影视图片：</label>
+                </div>
+                <div class="field">
+                    <el-upload
+                            class="upload-demo"
+                            name="uploadImage"
+                            action="/admin/upload/image"
+                            :headers="myHeaders"
+                            :limit="1"
+                            :on-success="handleImageSuccess"
+                            :before-upload="handleBeforeUpload"
+                            :show-file-list="false">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                    </el-upload>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>影视文件：</label>
+                </div>
+                <div class="field">
+                    <el-upload
+                            class="upload-demo"
+                            name="uploadVideo"
+                            action="/admin/upload/video"
+                            :headers="myHeaders"
+                            :limit="1"
+                            :on-success="handleVideoSuccess"
+                            :before-upload="handleBeforeUpload"
+                            :show-file-list="false">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                    </el-upload>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>影视描述：</label>
+                </div>
+                <div class="field">
+                    <textarea class="input" style="height:150px;width: 50%; border:1px solid #ddd;"
+                              v-model="movie.description"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <a class="button bg-main icon-check-square-o" @click="save()"> 提交</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var token =  localStorage.getItem('token') // 获取token
+    const app = new Vue({
+
+        el: '#movieDiv',
+        data: {
+            myHeaders: {token: token},
+            movie: {
+                "cid": 2,
+            },
+            loading: false
+        },
+        methods: {
+            //文件开始上传,开始屏幕遮罩
+            handleBeforeUpload() {
+                this.loading = true;
+            },
+
+            //图片上传成功的钩子函数
+            handleImageSuccess(res, file) {
+                this.loading = false;
+                if (file.response != "") {
+                    this.movie.image = file.response;
+                    this.$message({
+                        type: 'info',
+                        message: '图片上传成功',
+                        duration: 6000
+                    });
+                } else {
+                    this.$message({
+                        type: 'info',
+                        message: '图片上传失败',
+                        duration: 6000
+                    });
+                }
+            },
+
+            //视频上传成功的钩子函数
+            handleVideoSuccess(res, file) {
+                this.loading = false;
+                if (file.response != "") {
+                    this.movie.playId = file.response;
+                    this.$message({
+                        type: 'info',
+                        message: '视频上传成功',
+                        duration: 6000
+                    });
+                } else {
+                    this.$message({
+                        type: 'info',
+                        message: '视频上传失败',
+                        duration: 6000
+                    });
+                }
+            },
+
+            //根据影视id查询信息
+            findById(movieId) {
+                axios.get('/admin/movie/findById?id=' + movieId).then(resp => {
+                    this.movie = resp.data;
+                })
+            },
+
+            //保存影视
+            save() {
+                axios.post('/admin/movie/save', this.movie).then(resp => {
+                    location.href = "./movie_list.html";
+                })
+            },
+        },
+
+        created() {
+            //根据id查询当前页面影视信息
+            let movieId = location.search.split("=")[1];
+            if (movieId) {//当修改的时候,才查询
+                this.findById(movieId);
+            }
+        }
+    })
+</script>

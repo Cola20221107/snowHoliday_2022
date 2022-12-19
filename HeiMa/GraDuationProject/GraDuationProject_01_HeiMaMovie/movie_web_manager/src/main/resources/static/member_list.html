@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="./css/pintuer.css">
+<link rel="stylesheet" href="./css/admin.css">
+<script src="./js/jquery.js"></script>
+<script src="./js/pintuer.js"></script>
+<script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+<script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+<script type="text/javascript" src="./js/token.js"></script>
+
+
+<div class="panel admin-panel" id="memberListListDiv">
+    <div class="panel-head"><strong class="icon-reorder">会员列表</strong> <a href="" style="float:right; display:none;">添加字段</a>
+    </div>
+    <div class="padding border-bottom" style="padding-bottom: 10px">
+        <a href="javascript:void(0)" class="button border-red icon-trash-o" @click="deleteByIds()"> 批量删除</a>
+        <a class="button border-main icon-plus-square-o" style="float: right" href="./member_add.html"> 添加会员</a>
+    </div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="5%">选择</th>
+            <th width="5%">排序</th>
+            <th>会员名</th>
+            <th>手机号</th>
+            <th width="310">操作</th>
+        </tr>
+
+        <tr v-for="(member,index) in memberList">
+            <td style="text-align:left; padding-left:10px;">
+                <input type="checkbox" name="ids" v-model="ids" :value="member.id"/>
+            </td>
+            <td style="text-align:left; padding-left:20px;">{{index+1}}</td>
+            <td>{{member.username}}</td>
+            <td>{{member.phone}}</td>
+            <td>
+                <div class="button-group">
+                    <a class="button border-main" :href="'./member_add.html?id='+member.id">
+                        <span class="icon-edit"></span>修改
+                    </a>
+                    <a class="button border-red" href="javascript:void(0)" @click="deleteById(member.id)">
+                        <span class="icon-trash-o"></span> 删除
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    const app = new Vue({
+        el: '#memberListListDiv',
+        data: {
+            memberList: [],
+            ids: [],
+        },
+        methods: {
+            findList() {
+                axios.get('/admin/member/findAll').then(resp => {
+                    this.memberList = resp.data;
+                })
+            },
+            deleteById(moviesId) {
+                axios.get('/admin/member/deleteById?id=' + moviesId).then(resp => {
+                    this.findList();
+                })
+            },
+            deleteByIds() {
+                axios.get('/admin/member/deleteByIds?ids=' + this.ids).then(resp => {
+                    this.findList();
+                })
+            },
+        },
+        created() {
+            this.findList();
+        }
+    })
+</script>
