@@ -13,7 +13,7 @@ spring:
 # mybatis简单配置
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启标准日志输出
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启标准日志输出
     map-underscore-to-camel-case: true # 开启自动驼峰转换
 
 # 阿里配置
@@ -22,3 +22,6 @@ al:
     regionId: cn-shanghai
     accessKeyId: # 自行申请
     accessKeySecret:
+logging:
+  level:
+    org.springframework.boot.autoconfigure: error
