@@ -2,6 +2,7 @@ package xyz.ccola.domain;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
  * @ Time: 2022/12/27 17:40
  * @ Description: Category
  */
+@Data
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 

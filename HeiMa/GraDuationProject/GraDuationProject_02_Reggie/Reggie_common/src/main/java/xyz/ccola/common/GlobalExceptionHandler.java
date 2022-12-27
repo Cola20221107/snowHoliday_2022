@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 异常处理方法
-     * @return
+     * @return R
      */
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public R<String> exceptionHandler(SQLIntegrityConstraintViolationException ex){
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 异常处理方法
-     * @return
+     * @return R
      */
     @ExceptionHandler(CustomException.class)
     public R<String> exceptionHandler(CustomException ex){

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @ Name: MybatisPlusConfig
  * @ Author: Cola
  * @ Time: 2022/12/27 20:10
- * @ Description: 配置MP的分页插件
+ * @ Description: 配置 MP 的分页插件
  */
 @Configuration
 public class MybatisPlusConfig {

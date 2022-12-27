@@ -10,4 +10,10 @@ import xyz.ccola.domain.Orders;
  * @ Description: OrdersService
  */
 public interface OrdersService extends IService<Orders> {
+
+    /**
+     * 用户下单
+     * @param orders orders
+     */
+    void submit(Orders orders);
 }
