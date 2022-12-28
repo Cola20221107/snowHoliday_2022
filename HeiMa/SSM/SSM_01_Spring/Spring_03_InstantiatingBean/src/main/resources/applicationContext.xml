@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--通过无参构造方法实例化 Bean-->
+    <bean id="bookBean" class="xyz.ccola.bean.Book"/>
+
+    <!--通过静态工厂的方法实例化 Bean-->
+    <bean id="friendBean" class="xyz.ccola.bean.Friend" factory-method="friendFactory"/>
+
+    <!-- 创建 UserAndPhone 的 FactoryBean-->
+    <bean id="userAndPhoneFactoryBean" class="xyz.ccola.bean.UserAndPhoneFactoryBean"/>
+
+    <!--通过实例工厂的方法实例化 Bean-->
+    <bean id="userBean" factory-bean="userAndPhoneFactoryBean" factory-method="userFactory"/>
+    <bean id="phoneBean" factory-bean="userAndPhoneFactoryBean" factory-method="phoneFactory"/>
+</beans>

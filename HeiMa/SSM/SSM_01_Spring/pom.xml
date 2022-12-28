@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>Spring_01_quickstart</module>
+        <module>Spring_03_InstantiatingBean</module>
     </modules>
 
     <properties>

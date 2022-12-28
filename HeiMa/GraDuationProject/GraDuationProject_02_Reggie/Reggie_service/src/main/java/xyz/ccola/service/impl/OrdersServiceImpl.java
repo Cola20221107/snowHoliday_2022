@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.ccola.common.BaseContext;
@@ -13,6 +12,7 @@ import xyz.ccola.domain.*;
 import xyz.ccola.mapper.OrdersMapper;
 import xyz.ccola.service.*;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,16 +28,16 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> implements OrdersService {
-    @Autowired
+    @Resource
     private ShoppingCartService shoppingCartService;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private AddressBookService addressBookService;
 
-    @Autowired
+    @Resource
     private OrderDetailService orderDetailService;
 
     /**
